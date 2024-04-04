@@ -1,0 +1,67 @@
+ /* .box1{
+    width:15rem;
+    height: 15rem;
+    background-color: green;
+    z-index:-999;
+} */
+/* .box2{
+    opacity: 70%;
+    width:15rem;
+    height: 15rem;
+    background-color: pink;
+    cursor:pointer;
+    z-index: 999;
+   
+     bottom:7rem;
+    left:3rem;
+}
+.box3{
+    width:15rem;
+    height: 15rem;
+    background-color: gold;
+    z-index:-999;
+
+}
+.box{
+    display: flex;
+   justify-content: space-between; */
+
+
+ /* .text{
+    overflow: scroll;
+    border:1px solid black;
+    width: 15rem;
+    height: 3rem; 
+ }*/
+
+/* .box1{
+    width: 15rem;
+    height: 15rem;
+    background-color: green;
+}
+.box1:hover{
+    transform:rotate(45deg)
+} */
+
+.box{
+    width:15rem;
+    height: 3rem;
+    background: black;
+    animation-name:hyemdori;
+    animation-duration:1s;
+    animation-delay:1s;
+    animation-iteration-count:5;
+}
+@keyframes hyemdori{
+    0%{
+        position:relative;
+        top: 1rem;
+        left: 1rem;
+    
+    }
+    100%{
+        position: relative;
+        top: 3rem;
+        left: 3rem;
+        }
+}

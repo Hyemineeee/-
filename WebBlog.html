@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>블로그</title>
+<link rel="stylesheet" href="/style.css">
+<link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+    />
+
+    <style>
+        .icon-container {
+            text-align: center; }
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.9);
+    }
+
+    .modal-content {
+        margin: 10% auto;
+        display: block;
+        width: 50%;
+        max-width: 600px;
+    }
+
+    .close {
+        color: #fff;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 30px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .content-list-item {
+        color: #000;
+        position: relative; 
+        margin-bottom: 5px; 
+    }
+
+    .delete-post {
+        position: absolute; 
+        right: 0; 
+        top: 0; 
+        cursor: pointer; 
+    }
+    </style>
+</head>
+<body>
+    <h1> Hyemdori's Blog</h1> 
+    
+    <h4><a href="https://blog.naver.com/hyemin6579">혬도리</a></h4> 
+        <img src="cute.png" alt="Cute Image" class="cute-image" width="3% "> 
+        <div class="icon-container">
+            <i class="fas fa-cloud"></i>
+        </div>
+        <div class="container">
+            <div class="nav">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link" id="openModal">Image</a>
+                <a href="#" class="nav-link">Contact</a>
+                <a href="https://www.instagram.com/hyemdori?igsh=MWVsdzFoeTg0bmd0cQ%3D%3D&utm_source=qr" class="nav-link">Instagram</a>
+            </div>
+            <!-- 수정: 저장된 글을 표시할 목록 요소 추가 -->
+            <div id="postList"></div>
+            <div class="content-box">
+                <textarea id="postContent" placeholder="글을 쓰세요..." class="content-textarea"></textarea>
+                <!-- 수정: 저장 버튼 클릭 시 renderPosts() 함수 호출 -->
+                <button onclick="savePost()" class="post-button">게시하기</button>
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01" src="1.jpg">
+    </div>
+    
+    <script>
+        // 글을 저장하기 위한 함수
+        function savePost() {
+            var content = document.getElementById("postContent").value;
+            var postList = JSON.parse(localStorage.getItem("posts")) || [];
+            postList.unshift(content);
+            localStorage.setItem("posts", JSON.stringify(postList));
+            renderPosts();
+        }
+
+        // 저장된 글을 렌더링하는 함수
+        function renderPosts() {
+            var postList = JSON.parse(localStorage.getItem("posts")) || [];
+            var postListElement = document.getElementById("postList");
+            postListElement.innerHTML = ""; // 기존 목록 초기화
+            var list = document.createElement("ul"); // 목록 요소 생성
+            postList.forEach(function(postContent, index) {
+                var listItem = document.createElement("li");
+                listItem.className = "content-list-item";
+                listItem.textContent = postContent;
+                list.appendChild(listItem); // 목록에 항목 추가
+
+                // 삭제 버튼 추가
+                var deleteButton = document.createElement("span");
+                deleteButton.className = "delete-post";
+                deleteButton.textContent = "X";
+                deleteButton.onclick = function() {
+                    deletePost(index);
+                };
+                listItem.appendChild(deleteButton); // 삭제 버튼을 각 저장된 글 옆에 추가
+            });
+            postListElement.appendChild(list); // 목록을 화면에 추가
+        }
+
+        // 저장된 글 삭제 함수
+        function deletePost(index) {
+            var postList = JSON.parse(localStorage.getItem("posts")) || [];
+            postList.splice(index, 1); // 배열에서 해당 인덱스의 요소 삭제
+            localStorage.setItem("posts", JSON.stringify(postList)); // 업데이트된 목록을 다시 로컬 스토리지에 저장
+            renderPosts(); // 변경된 목록을 다시 렌더링
+        }
+
+        document.getElementById("openModal").addEventListener("click", function() {
+        document.getElementById("myModal").style.display = "block";
+    });
+
+    // 모달 닫기
+    document.getElementsByClassName("close")[0].addEventListener("click", function() {
+        document.getElementById("myModal").style.display = "none";
+    });
+
+    // 모달 외부 클릭 시 닫기
+    window.addEventListener("click", function(event) {
+        var modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
+
+        // 초기 렌더링
+        window.onload = renderPosts;
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+body{
+    background-image:url("/3주차/c9fc6597-f43b-40f8-a1ae-ea3f0a426210.jpg");
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+}
+.h:hover{
+    cursor: pointer;
+}
+nav{
+    background-color: beige;
+    display: flex;
+}
+
+.h{
+    display: inline-block;
+    margin-right: 5vw;    
+}
+.login{
+    margin-left: auto;
+    margin-right: 5vw;
+}
+.login:hover{
+    color: red;
+}
+.menu{
+    margin-left: 2vw;
+}
+input{
+    border: 2px solid white;
+    border-radius: 15px;
+    width: 200px;
+    height: 150px;
+    top: 200px;
+    left: 30px;
+    position: relative;
+    background-color: transparent;
+
+
+    animation-name: abcd;
+    animation-duration: 3s;
+    animation-delay: 3s;
+    animation-iteration-count: infinite;
+}
+@keyframes abcd{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(45deg);
+    }
+}
+.tiger{
+    text-align: center;
+}
+footer{
+    background-color: brown;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    line-height: 7vh;
+}
+footer:hover{
+    background-color: green;
+}
